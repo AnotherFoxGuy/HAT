@@ -9,8 +9,8 @@ function Update () {
 	if(Input.GetKey("a"))
 		rigidbody2D.AddForce(transform.TransformDirection(Vector3.left*20));
 		
-	if(Input.GetKey("space"))
-		rigidbody2D.AddForce(transform.TransformDirection(Vector3.up*20));
+	if(Input.GetKeyDown("space"))
+		rigidbody2D.AddForce(transform.TransformDirection(Vector3.up*200));
 
 }
 
