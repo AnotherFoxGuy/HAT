@@ -36,14 +36,17 @@ function Update() {
 		transform.RotateAround (RotPointCenter, Vector3.up, RotSpeed);
 	}
 	
-	if (transform.eulerAngles.y > WorldRotate -1 && transform.eulerAngles.y < WorldRotate +1){
+	if (transform.eulerAngles.y > WorldRotate - 0.1 && transform.eulerAngles.y < WorldRotate +0.1){
 		if(StopRotateWorld){
 			RotateWorld = false;
-			Time.timeScale = 1;
 			StopRotateWorld = false;
+			this.transform.position.z = 0;
+			this.transform.eulerAngles.y =Mathf.Round(this.transform.eulerAngles.y);
+			Player.transform.position.y+=0.01;
+			Time.timeScale = 1;
 		}
 	}
-	if(transform.eulerAngles.y < WorldRotate -2 || transform.eulerAngles.y > WorldRotate +2){
+	if(this.transform.eulerAngles.y < WorldRotate -2 || this.transform.eulerAngles.y > WorldRotate +2){
 			StopRotateWorld = true;
 	}
 }
@@ -51,7 +54,7 @@ function RotCenterCalculate(){
 	var PosTMP = Vector3(Player.transform.position.x, Player.transform.position.y - 1, Player.transform.position.z);
 	if (Physics.Raycast(PosTMP, Vector3.forward, HitPointFront, 300)) {
 		Debug.DrawLine(PosTMP, HitPointFront.point);
-		var HitPointFrontTMP = Vector3(HitPointFront.point.x, HitPointFront.point.y, HitPointFront.point.z + 10);
+		var HitPointFrontTMP = Vector3(HitPointFront.point.x, HitPointFront.point.y, HitPointFront.point.z + 150);
 		if (Physics.Raycast(HitPointFrontTMP, Vector3.back, HitPointBack, 200)) {
 			Debug.DrawLine(HitPointFrontTMP, HitPointBack.point);
 			var HitPointCenter = Vector3.Distance(HitPointBack.point, HitPointFront.point) / 2;
@@ -60,7 +63,7 @@ function RotCenterCalculate(){
 		}
 	else if (Physics.Raycast(PosTMP, Vector3.back, HitPointBack, 300)) {
 		Debug.DrawLine(PosTMP, HitPointBack.point);
-		var HitPointBackTMP = Vector3(HitPointBack.point.x, HitPointBack.point.y, HitPointBack.point.z - 10);
+		var HitPointBackTMP = Vector3(HitPointBack.point.x, HitPointBack.point.y, HitPointBack.point.z - 150);
 		if (Physics.Raycast(HitPointBackTMP, Vector3.forward, HitPointFront, 200)) {
 			Debug.DrawLine(HitPointBackTMP, HitPointFront.point);
 			var HitPointCenterBack = Vector3.Distance(HitPointBack.point, HitPointFront.point) / 2;
