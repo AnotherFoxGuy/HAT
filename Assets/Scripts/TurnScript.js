@@ -10,23 +10,21 @@ private var RotPointCenter : Vector3;
 private var HitPointFront: RaycastHit;
 private var HitPointBack: RaycastHit;
 
-
-
 function Start() {
 	Player = GameObject.Find("Player");
 }
 
 function Update() {
-	textboxtext = this.transform.eulerAngles.y+"\n"+WorldRotate;
+	//textboxtext = this.transform.eulerAngles.y+"\n"+WorldRotate;
 
 	if (Input.GetKeyDown("q") && !RotateWorld) {
-		RotCalculate();
+		RotCenterCalculate();
 		RotateWorld = true;
 		WorldRotate = Mathf.Repeat(WorldRotate + 90, 360);
 		RotSpeed = 1;
 	}
 	if (Input.GetKeyDown("e") && !RotateWorld) {
-		RotCalculate();
+		RotCenterCalculate();
 		RotateWorld = true;
 		WorldRotate =  Mathf.Repeat(WorldRotate - 90, 360);
 		RotSpeed = -1;
@@ -49,7 +47,7 @@ function Update() {
 			StopRotateWorld = true;
 	}
 }
-function RotCalculate(){
+function RotCenterCalculate(){
 	var PosTMP = Vector3(Player.transform.position.x, Player.transform.position.y - 1, Player.transform.position.z);
 	if (Physics.Raycast(PosTMP, Vector3.forward, HitPointFront, 300)) {
 		Debug.DrawLine(PosTMP, HitPointFront.point);
@@ -74,9 +72,10 @@ function RotCalculate(){
 	}
 	Debug.DrawLine(Vector3.zero, RotPointCenter);
 }
-
+/*
 function OnGUI () {
 	GUI.Box (Rect (10,100,150,50),textboxtext);
 }
+*/
 
 

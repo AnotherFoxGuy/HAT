@@ -10,7 +10,7 @@ function Update () {
 		rigidbody2D.AddForce(transform.TransformDirection(Vector3.left*20));
 		
 	if(Input.GetKeyDown("space"))
-		rigidbody2D.AddForce(transform.TransformDirection(Vector3.up*200));
+		rigidbody2D.AddForce(transform.TransformDirection(Vector3.up*400));
 
 }
 
