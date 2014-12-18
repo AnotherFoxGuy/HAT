@@ -1,39 +1,30 @@
 ﻿#pragma strict
 
-private var PlayerRigidbody2D : Rigidbody2D ;
-private var Collision = false;
-
+private var PlayerRigidbody : Rigidbody ;
+private var HitPoint: RaycastHit;
+var MaxSpeed = 7;
 
 function Start () {
-	PlayerRigidbody2D = this.GetComponent(Rigidbody2D);
+	PlayerRigidbody = this.GetComponent(Rigidbody);
 }
 
 function Update () {
-	var MaxSpeed = 7;
 	
 	if(Input.GetKey("d")){
-		if(PlayerRigidbody2D.velocity.x < MaxSpeed){
-			rigidbody2D.AddForce(transform.TransformDirection(Vector3.right*20));	
+		if(PlayerRigidbody.velocity.x < MaxSpeed){
+			PlayerRigidbody.AddForce(transform.TransformDirection(Vector3.right*20));	
 		}
 	}
 
 	if(Input.GetKey("a")){
-		if(PlayerRigidbody2D.velocity.x > -MaxSpeed){
-			rigidbody2D.AddForce(transform.TransformDirection(Vector3.left*20));
+		if(PlayerRigidbody.velocity.x > -MaxSpeed){
+			PlayerRigidbody.AddForce(transform.TransformDirection(Vector3.left*20));
 		}
 	}
 		
 	if(Input.GetKeyDown("space")){
-		if(Collision){
-			rigidbody2D.AddForce(transform.TransformDirection(Vector3.up*400));
+		if(Physics.Raycast(this.transform.position, Vector3.down, 0.6)){
+			PlayerRigidbody.AddForce(transform.TransformDirection(Vector3.up*400));
 		}
 	}
 }
-
-function OnCollisionEnter2D () {
-	Collision = true;
-}
-
-function OnCollisionExit2D () {
-	Collision = false;
- }

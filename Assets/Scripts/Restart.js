@@ -1,5 +1,5 @@
 ﻿#pragma strict
 
-function OnTriggerEnter2D (player : Collider2D) {
+function OnTriggerEnter (player : Collider) {
 		Application.LoadLevel(Application.loadedLevel);
 }
