@@ -18,24 +18,32 @@ function Start () {
 }
 
 function Update () {
-	var PosTMP = Vector3(Player.transform.position.x + PlayerRigidbody.velocity.x/7, Player.transform.position.y - 2, Player.transform.position.z - 100);
-	Debug.DrawLine(Vector3.zero, PosTMP);
-	if (Physics.Raycast(PosTMP, Vector3.forward, HitPointFront, 300) && !RotateWorld) {
-		Debug.DrawLine(Vector3.zero, HitPointFront.point);
-		var PlayerDistance = Vector3.Distance(PosTMP, HitPointFront.point);
-			if (PlayerDistance > 1){
-				Player.transform.position.z = HitPointFront.point.z + 1;
-			}
+	var PosTMPFront = Vector3(Player.transform.position.x + PlayerRigidbody.velocity.x/7, Player.transform.position.y - 2, Player.transform.position.z - 100);
+	var PosTMPBack = Vector3(Player.transform.position.x + PlayerRigidbody.velocity.x/7, Player.transform.position.y - 2, Player.transform.position.z + 100);
+	Debug.DrawLine(Vector3.zero, PosTMPFront);
+	if (Physics.Raycast(PosTMPFront, Vector3.forward, HitPointFront, 300) && !RotateWorld) {
+		Debug.DrawLine(PosTMPFront, HitPointFront.point);
+		if (HitPointFront.point.z > Player.transform.position.z){
+			//print("HitPointFront");
+			Player.transform.position.z = HitPointFront.point.z + 0.2;
+		}
+	}
+	if (Physics.Raycast(PosTMPBack, Vector3.back, HitPointBack, 300) && !RotateWorld) {
+		Debug.DrawLine(PosTMPBack, HitPointBack.point);
+		if (HitPointBack.point.z < Player.transform.position.z){
+			//print("HitPointBack");
+			Player.transform.position.z = HitPointBack.point.z - 0.2;
+		}
 	}
 	if (Input.GetKeyDown("q") && !RotateWorld) {
 		RotateWorld = true;
 		WorldRotate = Mathf.Repeat(WorldRotate + 90, 360);
-		RotSpeed = 1;
+		RotSpeed = 1.5;
 	}
 	if (Input.GetKeyDown("e") && !RotateWorld) {
 		RotateWorld = true;
 		WorldRotate =  Mathf.Repeat(WorldRotate - 90, 360);
-		RotSpeed = -1;
+		RotSpeed = -1.5;
 	}
 	if (RotateWorld) {
 		Time.timeScale = 0;
