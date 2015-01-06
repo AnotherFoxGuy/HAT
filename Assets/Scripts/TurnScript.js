@@ -4,13 +4,12 @@ private var Player: GameObject;
 private var PlayerRigidbody : Rigidbody;
 private var RotateWorld= false;
 private var StopRotateWorld= false;
-private var textboxtext = "";
 private var WorldRotate = 0;
 private var RotSpeed = 0;
 private var RotPointCenter : Vector3;
 private var HitPointFront: RaycastHit;
 private var HitPointBack: RaycastHit;
-
+public var RotateSpeed = 1.5;
 
 function Start () {
 	Player = GameObject.Find("Player");
@@ -18,9 +17,9 @@ function Start () {
 }
 
 function Update () {
-	var PosTMPFront = Vector3(Player.transform.position.x + PlayerRigidbody.velocity.x/7, Player.transform.position.y - 2, Player.transform.position.z - 100);
-	var PosTMPBack = Vector3(Player.transform.position.x + PlayerRigidbody.velocity.x/7, Player.transform.position.y - 2, Player.transform.position.z + 100);
-	Debug.DrawLine(Vector3.zero, PosTMPFront);
+	var PosTMPFront = Vector3(Player.transform.position.x + PlayerRigidbody.velocity.x/4, Player.transform.position.y - 2, Player.transform.position.z - 100);
+	var PosTMPBack = Vector3(Player.transform.position.x + PlayerRigidbody.velocity.x/4, Player.transform.position.y - 2, Player.transform.position.z + 100);
+	Debug.DrawLine(Player.transform.position, PosTMPFront);
 	if (Physics.Raycast(PosTMPFront, Vector3.forward, HitPointFront, 300) && !RotateWorld) {
 		Debug.DrawLine(PosTMPFront, HitPointFront.point);
 		if (HitPointFront.point.z > Player.transform.position.z){
@@ -35,15 +34,15 @@ function Update () {
 			Player.transform.position.z = HitPointBack.point.z - 0.2;
 		}
 	}
-	if (Input.GetKeyDown("q") && !RotateWorld) {
+	if (Input.GetButtonDown("TurnLeft") && !RotateWorld) {
 		RotateWorld = true;
 		WorldRotate = Mathf.Repeat(WorldRotate + 90, 360);
-		RotSpeed = 1.5;
+		RotSpeed = RotateSpeed;
 	}
-	if (Input.GetKeyDown("e") && !RotateWorld) {
+	if (Input.GetButtonDown("TurnRight") && !RotateWorld) {
 		RotateWorld = true;
 		WorldRotate =  Mathf.Repeat(WorldRotate - 90, 360);
-		RotSpeed = -1.5;
+		RotSpeed = -RotateSpeed;
 	}
 	if (RotateWorld) {
 		Time.timeScale = 0;
