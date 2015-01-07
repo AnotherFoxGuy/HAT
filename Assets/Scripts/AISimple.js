@@ -3,11 +3,11 @@
 private var HitPoint: RaycastHit;
 private var MoveTo = 1;
 private var One = 1;
-public var MoveToSpeed = 0.01;
+public var MoveSpeed = 0.01;
 public var MaxSpeed = 7;
 
 function Start () {
-        MoveTo = MoveToSpeed;
+        MoveTo = MoveSpeed;
 }
 
 function FixedUpdate () {
@@ -17,11 +17,11 @@ function FixedUpdate () {
         Debug.DrawLine(this.transform.position, PosTMP);
         if (!Physics.Raycast(PosTMP, Vector3.down, HitPoint, 1)) {
                 if(MoveTo > 0){
-                        MoveTo = -MoveToSpeed;
+                        MoveTo = -MoveSpeed;
                         One = -1;
                 }
                 else{
-                        MoveTo = MoveToSpeed;
+                        MoveTo = MoveSpeed;
                         One = 1;
                 }
         }

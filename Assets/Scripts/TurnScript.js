@@ -10,25 +10,31 @@ private var RotPointCenter : Vector3;
 private var HitPointFront: RaycastHit;
 private var HitPointBack: RaycastHit;
 public var RotateSpeed = 1.5;
+private var Skybox: GameObject;
+private var Level: GameObject;
+
 
 function Start () {
 	Player = GameObject.Find("Player");
 	PlayerRigidbody = Player.GetComponent(Rigidbody);
+	Skybox = GameObject.Find("Skybox");
+	Level = GameObject.Find("Level");
+	Skybox.transform.position.z = Level.transform.position.z;
 }
 
 function Update () {
 	var PosTMPFront = Vector3(Player.transform.position.x + PlayerRigidbody.velocity.x/4, Player.transform.position.y - 2, Player.transform.position.z - 100);
 	var PosTMPBack = Vector3(Player.transform.position.x + PlayerRigidbody.velocity.x/4, Player.transform.position.y - 2, Player.transform.position.z + 100);
-	Debug.DrawLine(Player.transform.position, PosTMPFront);
+	//Debug.DrawLine(Player.transform.position, PosTMPFront);
 	if (Physics.Raycast(PosTMPFront, Vector3.forward, HitPointFront, 300) && !RotateWorld) {
-		Debug.DrawLine(PosTMPFront, HitPointFront.point);
+		Debug.DrawLine(Player.transform.position, HitPointFront.point);
 		if (HitPointFront.point.z > Player.transform.position.z){
 			//print("HitPointFront");
 			Player.transform.position.z = HitPointFront.point.z + 0.2;
 		}
 	}
 	if (Physics.Raycast(PosTMPBack, Vector3.back, HitPointBack, 300) && !RotateWorld) {
-		Debug.DrawLine(PosTMPBack, HitPointBack.point);
+		Debug.DrawLine(Player.transform.position, HitPointBack.point);
 		if (HitPointBack.point.z < Player.transform.position.z){
 			//print("HitPointBack");
 			Player.transform.position.z = HitPointBack.point.z - 0.2;
@@ -48,6 +54,7 @@ function Update () {
 		Time.timeScale = 0;
 		Debug.DrawLine(Vector3.zero, Player.transform.position);
 		transform.RotateAround (Player.transform.position, Vector3.up, RotSpeed);
+		Skybox.transform.position.z = Level.transform.position.z;
 	}
 	if (transform.eulerAngles.y > WorldRotate - 0.1 && transform.eulerAngles.y < WorldRotate +0.1){
 		if(StopRotateWorld){
