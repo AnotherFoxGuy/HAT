@@ -1,0 +1,42 @@
+# Blender MTL File: 'Skybox.blend'
+# Material Count: 4
+
+newmtl Back
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd E:\GitHub\HAT\Assets\Standard Assets\Skyboxes\Textures\Sunny1\Sunny1_back.tif
+
+newmtl Front
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd E:\GitHub\HAT\Assets\Standard Assets\Skyboxes\Textures\Sunny1\Sunny1_front.tif
+
+newmtl Left
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd E:\GitHub\HAT\Assets\Standard Assets\Skyboxes\Textures\Sunny1\Sunny1_left.tif
+
+newmtl Right
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd E:\GitHub\HAT\Assets\Standard Assets\Skyboxes\Textures\Sunny1\Sunny1_right.tif
