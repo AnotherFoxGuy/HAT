@@ -15,22 +15,15 @@ public class PlayerControls : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-
     void Update()
     {
-
         movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical"));
 
         transform.position += movement * moveSpeed;
 
         if (movement.x != 0 || movement.z != 0)
-        {
-
             animator.SetBool("isRunning", true);
-
-        }
         else
             animator.SetBool("isRunning", false);
-
     }
 }
