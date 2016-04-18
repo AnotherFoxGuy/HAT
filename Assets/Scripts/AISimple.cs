@@ -1,37 +1,51 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿// This file is part of HAT
+// 
+// Copyright (c) 2016 sietze greydanus
+// 
+// HAT is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 3, as
+// published by the Free Software Foundation.
+// 
+// HAT is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with HAT. If not, see <http://www.gnu.org/licenses/>.
+// 
+
+using UnityEngine;
 
 public class AISimple : MonoBehaviour
 {
-
-    private RaycastHit HitPoint;
-    private float MoveTo = 1;
-    private int One = 1;
-    public float MoveSpeed = 0.01f;
+    private float _moveTo = 1;
+    private int _one = 1;
     public float MaxSpeed = 7;
+    public float MoveSpeed = 0.01f;
 
-    void Start()
+    private void Start()
     {
-        MoveTo = MoveSpeed;
+        _moveTo = MoveSpeed;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (Mathf.Abs(GetComponent<Rigidbody>().velocity.x) < MaxSpeed)
-            GetComponent<Rigidbody>().AddForce(MoveTo, 0, 0);
-        var PosTMP = new Vector3(this.transform.position.x + One, this.transform.position.y, this.transform.position.z);
-        Debug.DrawLine(this.transform.position, PosTMP);
-        if (!Physics.Raycast(PosTMP, Vector3.down, out HitPoint, 1f))
+            GetComponent<Rigidbody>().AddForce(_moveTo, 0, 0);
+        var PosTMP = new Vector3(transform.position.x + _one, transform.position.y, transform.position.z);
+        Debug.DrawLine(transform.position, PosTMP);
+        if (!Physics.Raycast(PosTMP, Vector3.down, 1f))
         {
-            if (MoveTo > 0)
+            if (_moveTo > 0)
             {
-                MoveTo = -MoveSpeed;
-                One = -1;
+                _moveTo = -MoveSpeed;
+                _one = -1;
             }
             else
             {
-                MoveTo = MoveSpeed;
-                One = 1;
+                _moveTo = MoveSpeed;
+                _one = 1;
             }
         }
     }
